@@ -44,12 +44,14 @@ const Register = () => {
   }
 
   useEffect(() => {
+    console.log(user)
     if (user) {
       setTimeout(() => {
         navigate('/')
-      }, 200)
+      }, 2000)
     }
   }, [user])
+
   return (
     <Wrapper className="full-page">
       <form className="form" onSubmit={onSubmit}>
