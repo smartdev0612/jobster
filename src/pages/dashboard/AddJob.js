@@ -1,9 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FormRow, FormRowSelect } from '../../components'
 import Wrapper from '../../assets/wrappers/DashboardFormPage'
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
-import { handleChange } from '../../features/job/jobSlice'
+import {
+  handleChange,
+  clearValues,
+  createJob,
+} from '../../features/job/jobSlice'
 
 const AddJob = () => {
   const {
@@ -18,6 +22,7 @@ const AddJob = () => {
     isEditing,
     editJobId,
   } = useSelector((store) => store.job)
+  const { user } = useSelector((store) => store.user)
   const dispatch = useDispatch()
 
   const handleSubmit = (e) => {
@@ -27,6 +32,7 @@ const AddJob = () => {
       toast.error('Please fill out all fields')
       return
     }
+    dispatch(createJob({ position, company, jobLocation, jobType, status }))
   }
 
   const handleJobInput = (e) => {
@@ -34,6 +40,10 @@ const AddJob = () => {
     const value = e.target.value
     dispatch(handleChange({ name, value }))
   }
+
+  useEffect(() => {
+    dispatch(handleChange({ name: 'jobLocation', value: user.location }))
+  }, [])
 
   return (
     <Wrapper>
@@ -81,7 +91,7 @@ const AddJob = () => {
             <button
               type="button"
               className="btn btn-block clear-btn"
-              onClick={() => console.log('clear values')}
+              onClick={() => dispatch(clearValues())}
             >
               clear
             </button>
