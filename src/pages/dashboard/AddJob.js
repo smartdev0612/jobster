@@ -3,6 +3,7 @@ import { FormRow, FormRowSelect } from '../../components'
 import Wrapper from '../../assets/wrappers/DashboardFormPage'
 import { useSelector, useDispatch } from 'react-redux'
 import { toast } from 'react-toastify'
+import { handleChange } from '../../features/job/jobSlice'
 
 const AddJob = () => {
   const {
@@ -31,7 +32,7 @@ const AddJob = () => {
   const handleJobInput = (e) => {
     const name = e.target.name
     const value = e.target.value
-    console.log(name, value)
+    dispatch(handleChange({ name, value }))
   }
 
   return (
