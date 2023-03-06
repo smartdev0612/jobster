@@ -72,6 +72,7 @@ const userSlice = createSlice({
       .addCase(loginUser.fulfilled, (state, { payload }) => {
         const { user } = payload
         state.isLoading = false
+        state.isSidebarOpen = true
         state.user = user
         addUserToLocalStorage(user)
         toast.success(`Welcome Back ${user.name}`)
