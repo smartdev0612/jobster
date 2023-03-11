@@ -7,6 +7,7 @@ import JobInfo from './JobInfo'
 import moment from 'moment'
 import { deleteJob, setEditJob } from '../features/job/jobSlice'
 
+// Job info
 const Job = ({
   _id,
   position,
